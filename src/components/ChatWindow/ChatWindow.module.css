@@ -1,0 +1,108 @@
+/* Загальний стиль для контейнера вікна чату */
+.window {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Використовуємо всю висоту видимої частини екрану */
+  background-color: #f4f7f9;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* Стиль для заголовка чату */
+.window h2 {
+  margin: 0;
+  padding: 15px;
+  background-color: #007bff;
+  color: #ffffff;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Контейнер для повідомлень */
+.messages {
+  flex: 1;
+  padding: 15px;
+  overflow-y: auto; /* Додаємо вертикальний скрол, коли повідомлень багато */
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column; /* Вирівнювання повідомлень по вертикалі */
+  gap: 10px; /* Відступи між повідомленнями */
+}
+
+/* Загальний стиль для хмаринки повідомлення */
+.messageItem {
+  max-width: 60%;
+  padding: 10px 15px;
+  border-radius: 20px;
+  position: relative;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  word-wrap: break-word;
+  animation: fadeIn 0.5s ease;
+}
+
+/* Повідомлення від користувача, вирівняне праворуч */
+.userMessage {
+  align-self: flex-end; /* Вирівнювання праворуч */
+  background-color: #dcf8c6;
+  border-top-right-radius: 0;
+  text-align: right;
+}
+
+/* Повідомлення від бота, вирівняне ліворуч */
+.botMessage {
+  align-self: flex-start; /* Вирівнювання ліворуч */
+  background-color: #f1f0f0;
+  border-top-left-radius: 0;
+  text-align: left;
+}
+
+/* Стиль для імені відправника */
+.senderName {
+  margin: 0;
+  font-size: 12px; /* Маленький розмір шрифту для імені */
+  color: #555; /* Темно-сірий колір для контрасту */
+  margin-bottom: 5px; /* Відступ між ім'ям і текстом повідомлення */
+  display: block;
+}
+
+/* Стиль для тексту повідомлення */
+.messageText {
+  font-size: 16px; /* Більший розмір шрифту для тексту повідомлення */
+  margin: 0; /* Прибираємо зовнішні відступи */
+}
+
+.messageInput {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.sendButton {
+  width: 100%;
+  padding: 10px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.sendButton:hover {
+  background-color: #218838;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

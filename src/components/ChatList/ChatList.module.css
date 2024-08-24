@@ -1,0 +1,60 @@
+/* Загальний стиль для контейнера списку чатів */
+.chatListContainer {
+  flex: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+/* Хмаринка для окремого чату */
+.chatList {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Стиль для назви чату */
+.chatTitle {
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* Загальний стиль для кнопок дій */
+.actionBtns {
+  display: flex;
+  gap: 10px; /* Відступ між кнопками */
+}
+
+/* Стиль для кнопки редагування та видалення */
+.editBtn,
+.listBtn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  color: #007bff; /* Колір для редагування */
+  font-size: 16px;
+  transition: color 0.3s ease; /* Зміна кольору при наведенні */
+}
+
+.editBtn:hover,
+.listBtn:hover {
+  color: #0056b3; /* Темніший відтінок при наведенні */
+}
+
+/* Специфічний стиль для кнопки видалення */
+.listBtn {
+  color: #ff6b6b; /* Колір для видалення */
+}
+
+.listBtn:hover {
+  color: #ff4757; /* Темніший відтінок при наведенні */
+}

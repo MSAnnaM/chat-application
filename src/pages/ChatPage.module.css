@@ -1,0 +1,29 @@
+.chatContainer {
+  display: flex;
+  height: 100vh;
+  width: 80%;
+  margin: 0 auto;
+  background-color: #f0f4f8;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar {
+  width: 30%;
+  padding: 20px;
+  background-color: #f4f4f9;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Висота на всю висоту вікна */
+  box-sizing: border-box;
+}
+
+.chatPanel {
+  width: 70%;
+  background-color: #ffffff;
+  padding: 20px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
