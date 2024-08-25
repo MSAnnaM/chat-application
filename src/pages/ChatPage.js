@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadChats,
@@ -20,7 +20,6 @@ import "../App.css";
 import styles from "./ChatPage.module.css";
 import Placeholder from "../components/Placeholder/Placeholder";
 import LoginButton from "../components/LoginBtn/LoginBtn";
-import { loadUser } from "../redux/userSlice";
 import LogoutButton from "../components/LogoutBtn/LogoutBrn";
 
 const socket = io("http://localhost:3005");
@@ -35,18 +34,11 @@ function ChatPage() {
   const [newChat, setNewChat] = useState({ firstName: "", lastName: "" });
   const [newMessage, setNewMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
+  const [autoMessages, setAutoMessages] = useState(false);
 
-  const fetchData = useCallback(async () => {  
-    try {  
-      await dispatch(loadUser());  
-      await dispatch(loadChats());  
-    } catch (error) {  
-      console.error("Error loading data:", error);  
-    }  
-  }, [dispatch]);  
 
   useEffect(() => {
-    fetchData();
+    dispatch(loadChats());
     
     const handleNewMessage = (message) => {
       toast.info(`New message from ${message.sender}: ${message.text}`);
@@ -58,17 +50,19 @@ function ChatPage() {
     return () => {
       socket.off("newMessage", handleNewMessage);
     };
-  }, [fetchData, dispatch, selectedChat]);
+  }, [ dispatch, selectedChat]);
 
   const handleCreateChat = () => {
     dispatch(createNewChat(newChat));
     setNewChat({ firstName: "", lastName: "" });
   };
 
-  
+  const toggleAutoMessages = () => {
+    setAutoMessages(!autoMessages);
+    socket.emit('toggleAutoMessages', autoMessages);
+  };
 
   const handleRemoveChat = (id) => {
-    
     dispatch(deleteChat(id));
   };
 
@@ -108,6 +102,9 @@ function ChatPage() {
           onSelect={handleSelectChat}
           onRemove={handleRemoveChat}
         />
+        <button onClick={toggleAutoMessages}>
+        {autoMessages ? "Disable Auto Messages" : "Enable Auto Messages"}
+      </button>
         <ChatForm
           newChat={newChat}
           setNewChat={setNewChat}

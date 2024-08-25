@@ -28,7 +28,6 @@ export const { setUser, unsetUser } = userSlice.actions;
 export const loadUser = () => async (dispatch) => {
   try {
       const user = await fetchUser();
-      console.log("User loaded:", user);
 
     dispatch(setUser(user));
   } catch (er) {

@@ -5,7 +5,10 @@ import {
   removeChat,
   sendMessage,
   editChat,
+  fetchUser,
 } from "../api/chatApi";
+import { loadUser } from "./userSlice";
+
 
 const chatSlice = createSlice({
   name: "chats",
@@ -33,8 +36,14 @@ export const { setChats, setSelectedChat, addMessage } = chatSlice.actions;
 
 export const loadChats = () => async (dispatch) => {
   try {
+    const user = await fetchUser();
+    if (user) {
+      await dispatch(loadUser());
+      const userChats = await fetchChats();
+      dispatch(setChats(userChats));
+      return 
+    }
     const chats = await fetchChats();
-    console.log("Chats loaded:", chats);
 
     dispatch(setChats(chats));
   } catch (er) {
