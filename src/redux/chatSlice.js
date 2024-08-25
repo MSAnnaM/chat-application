@@ -34,6 +34,7 @@ export const { setChats, setSelectedChat, addMessage } = chatSlice.actions;
 export const loadChats = () => async (dispatch) => {
   try {
     const chats = await fetchChats();
+    console.log("Chats loaded:", chats);
 
     dispatch(setChats(chats));
   } catch (er) {

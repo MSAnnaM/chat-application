@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   loadChats,
@@ -19,11 +19,15 @@ import "react-toastify/dist/ReactToastify.css";
 import "../App.css";
 import styles from "./ChatPage.module.css";
 import Placeholder from "../components/Placeholder/Placeholder";
+import LoginButton from "../components/LoginBtn/LoginBtn";
+import { loadUser } from "../redux/userSlice";
+import LogoutButton from "../components/LogoutBtn/LogoutBrn";
 
 const socket = io("http://localhost:3005");
 
 function ChatPage() {
   const dispatch = useDispatch();
+  const isUser = useSelector((state) => state.user.isUser);
   const chats = useSelector((state) => state.chats.chats);
   const selectedChat = useSelector((state) => state.chats.selectedChat);
   const messages = useSelector((state) => state.chats.messages);
@@ -32,9 +36,18 @@ function ChatPage() {
   const [newMessage, setNewMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
 
-  useEffect(() => {
-    dispatch(loadChats());
+  const fetchData = useCallback(async () => {  
+    try {  
+      await dispatch(loadUser());  
+      await dispatch(loadChats());  
+    } catch (error) {  
+      console.error("Error loading data:", error);  
+    }  
+  }, [dispatch]);  
 
+  useEffect(() => {
+    fetchData();
+    
     const handleNewMessage = (message) => {
       toast.info(`New message from ${message.sender}: ${message.text}`);
       dispatch(addMessage(message));
@@ -45,7 +58,7 @@ function ChatPage() {
     return () => {
       socket.off("newMessage", handleNewMessage);
     };
-  }, [dispatch, selectedChat]);
+  }, [fetchData, dispatch, selectedChat]);
 
   const handleCreateChat = () => {
     dispatch(createNewChat(newChat));
@@ -55,6 +68,7 @@ function ChatPage() {
   
 
   const handleRemoveChat = (id) => {
+    
     dispatch(deleteChat(id));
   };
 
@@ -88,6 +102,7 @@ function ChatPage() {
       />
       <aside className={styles.sidebar}>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+         {!isUser ? <LoginButton /> : <LogoutButton/>}
         <ChatList
           chats={filteredChats}
           onSelect={handleSelectChat}

@@ -17,6 +17,13 @@ const ChatList = ({ chats, onSelect, onRemove }) => {
     setSelectedChat(null); // Скидання обраного чату
   };
 
+    const handleRemoveChat = (chatId) => {  
+    const confirmed = window.confirm("Are you sure you want to remove this chat?");  
+    if (confirmed) {  
+      onRemove(chatId); // Виклик функції видалення чату  
+    }  
+  };
+
   return (
     <div className={styles.chatListContainer}>
       {chats.map((chat) => (
@@ -35,7 +42,7 @@ const ChatList = ({ chats, onSelect, onRemove }) => {
           >
             <FaEdit className={styles.icon} />
           </button>
-          <button className={styles.listBtn} onClick={() => onRemove(chat._id)}>
+          <button className={styles.listBtn} onClick={() => handleRemoveChat(chat._id)}>
             <FaRegTrashAlt className={styles.icon} />
             </button>
           </div>
