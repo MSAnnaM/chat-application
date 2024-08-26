@@ -9,7 +9,6 @@ import {
 } from "../api/chatApi";
 import { loadUser } from "./userSlice";
 
-
 const chatSlice = createSlice({
   name: "chats",
   initialState: {
@@ -29,10 +28,15 @@ const chatSlice = createSlice({
     addMessage(state, action) {
       state.messages.push(action.payload);
     },
+    clearChats(state) {
+      state.chats = [];
+      state.selectedChat = null;
+      state.messages = [];
+    },
   },
 });
 
-export const { setChats, setSelectedChat, addMessage } = chatSlice.actions;
+export const { setChats, setSelectedChat, addMessage, clearChats } = chatSlice.actions;
 
 export const loadChats = () => async (dispatch) => {
   try {
@@ -41,7 +45,7 @@ export const loadChats = () => async (dispatch) => {
       await dispatch(loadUser());
       const userChats = await fetchChats();
       dispatch(setChats(userChats));
-      return 
+      return;
     }
     const chats = await fetchChats();
 
@@ -53,6 +57,7 @@ export const loadChats = () => async (dispatch) => {
 
 export const createNewChat = (chatData) => async (dispatch) => {
   try {
+      
     await createChat(chatData);
     dispatch(loadChats());
   } catch (er) {
@@ -64,12 +69,10 @@ export const updateChat = (id, data) => async (dispatch) => {
   try {
     await editChat(id, data);
     dispatch(loadChats());
-  }
-  catch (er) {
+  } catch (er) {
     console.log(er);
-    
   }
-}
+};
 
 export const deleteChat = (id) => async (dispatch) => {
   try {

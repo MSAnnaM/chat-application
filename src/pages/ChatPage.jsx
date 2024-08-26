@@ -7,7 +7,6 @@ import {
   setSelectedChat,
   sendNewMessage,
   addMessage,
-  // updateChat,
 } from "../redux/chatSlice";
 import ChatList from "../components/ChatList/ChatList";
 import ChatWindow from "../components/ChatWindow/ChatWindow";
@@ -34,12 +33,10 @@ function ChatPage() {
   const [newChat, setNewChat] = useState({ firstName: "", lastName: "" });
   const [newMessage, setNewMessage] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
-  const [autoMessages, setAutoMessages] = useState(false);
-
 
   useEffect(() => {
     dispatch(loadChats());
-    
+
     const handleNewMessage = (message) => {
       toast.info(`New message from ${message.sender}: ${message.text}`);
       dispatch(addMessage(message));
@@ -50,16 +47,11 @@ function ChatPage() {
     return () => {
       socket.off("newMessage", handleNewMessage);
     };
-  }, [ dispatch, selectedChat]);
+  }, [dispatch, selectedChat]);
 
   const handleCreateChat = () => {
     dispatch(createNewChat(newChat));
     setNewChat({ firstName: "", lastName: "" });
-  };
-
-  const toggleAutoMessages = () => {
-    setAutoMessages(!autoMessages);
-    socket.emit('toggleAutoMessages', autoMessages);
   };
 
   const handleRemoveChat = (id) => {
@@ -96,15 +88,12 @@ function ChatPage() {
       />
       <aside className={styles.sidebar}>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-         {!isUser ? <LoginButton /> : <LogoutButton/>}
+        {!isUser ? <LoginButton /> : <LogoutButton />}
         <ChatList
           chats={filteredChats}
           onSelect={handleSelectChat}
           onRemove={handleRemoveChat}
         />
-        <button onClick={toggleAutoMessages}>
-        {autoMessages ? "Disable Auto Messages" : "Enable Auto Messages"}
-      </button>
         <ChatForm
           newChat={newChat}
           setNewChat={setNewChat}

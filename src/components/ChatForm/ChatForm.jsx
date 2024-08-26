@@ -4,7 +4,7 @@ import style from "./ChatForm.module.css";
 
 const ChatForm = ({ newChat, setNewChat, onCreate }) => {  
   const handleSubmit = (e) => {
-    e.preventDefault(); // Запобігає перезавантаженню сторінки
+    e.preventDefault();
     onCreate();
   };
   return (  

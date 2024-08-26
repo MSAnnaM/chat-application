@@ -1,33 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchUser, logout } from "../api/chatApi";
+import { clearChats, loadChats } from "./chatSlice";
 
 const userSlice = createSlice({
   name: "user",
   initialState: {
-    name: '',
-    email: '',
+    name: "",
+    email: "",
     isUser: false,
   },
   reducers: {
     setUser(state, action) {
-          state.name = action.payload.name;
-          state.isUser = true;
-      },
-      unsetUser(state) {
-      state.name = '';
-      state.email = '';
+      state.name = action.payload.name;
+      state.isUser = true;
+    },
+    unsetUser(state) {
+      state.name = "";
+      state.email = "";
       state.isUser = false;
     },
   },
 });
 
- 
-
 export const { setUser, unsetUser } = userSlice.actions;
 
 export const loadUser = () => async (dispatch) => {
   try {
-      const user = await fetchUser();
+    const user = await fetchUser();
 
     dispatch(setUser(user));
   } catch (er) {
@@ -36,14 +35,14 @@ export const loadUser = () => async (dispatch) => {
 };
 
 export const logoutUser = () => async (dispatch) => {
-    try {
-        await logout();
-        dispatch(unsetUser());
-    }
-    catch (er) {
-        console.log(er);
-        
-    }
-}
+  try {
+    await logout();
+    dispatch(unsetUser());
+    dispatch(clearChats());
+    dispatch(loadChats());
+  } catch (er) {
+    console.log(er);
+  }
+};
 
 export default userSlice.reducer;

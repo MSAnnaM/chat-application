@@ -1,29 +1,62 @@
 .chatContainer {
   display: flex;
+  flex-direction: column;
   height: 100vh;
-  width: 80%;
-  margin: 0 auto;
+  width: 100%;
+  margin: 0;
   background-color: #f0f4f8;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar {
-  width: 30%;
-  padding: 20px;
+  width: 100%;
+  padding: 15px;
   background-color: #f4f4f9;
-  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Висота на всю висоту вікна */
+  height: auto;
   box-sizing: border-box;
 }
 
 .chatPanel {
-  width: 70%;
+  width: 100%;
   background-color: #ffffff;
-  padding: 20px;
+  padding: 15px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+@media (min-width: 768px) {
+  .chatContainer {
+    flex-direction: row;
+    height: 100vh;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .sidebar {
+    width: 35%;
+    height: 100vh;
+    border-right: 1px solid #ddd;
+  }
+
+  .chatPanel {
+    width: 65%;
+    height: 100vh;
+  }
+}
+@media (min-width: 1024px) {
+  .chatContainer {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .sidebar {
+    width: 30%;
+  }
+
+  .chatPanel {
+    width: 70%;
+  }
 }

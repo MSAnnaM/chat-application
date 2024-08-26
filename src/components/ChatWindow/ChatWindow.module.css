@@ -1,15 +1,13 @@
-/* Загальний стиль для контейнера вікна чату */
 .window {
   display: flex;
   flex-direction: column;
-  height: 100vh; /* Використовуємо всю висоту видимої частини екрану */
+  height: 100vh;
   background-color: #f4f7f9;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-/* Стиль для заголовка чату */
 .window h2 {
   margin: 0;
   padding: 15px;
@@ -19,20 +17,18 @@
   border-bottom: 1px solid #ddd;
 }
 
-/* Контейнер для повідомлень */
 .messages {
   flex: 1;
   padding: 15px;
-  overflow-y: auto; /* Додаємо вертикальний скрол, коли повідомлень багато */
+  overflow-y: auto;
   background-color: #ffffff;
   display: flex;
-  flex-direction: column; /* Вирівнювання повідомлень по вертикалі */
-  gap: 10px; /* Відступи між повідомленнями */
+  flex-direction: column;
+  gap: 10px;
 }
 
-/* Загальний стиль для хмаринки повідомлення */
 .messageItem {
-  max-width: 60%;
+  max-width: 100%;
   padding: 10px 15px;
   border-radius: 20px;
   position: relative;
@@ -41,35 +37,31 @@
   animation: fadeIn 0.5s ease;
 }
 
-/* Повідомлення від користувача, вирівняне праворуч */
 .userMessage {
-  align-self: flex-end; /* Вирівнювання праворуч */
+  align-self: flex-end;
   background-color: #dcf8c6;
   border-top-right-radius: 0;
   text-align: right;
 }
 
-/* Повідомлення від бота, вирівняне ліворуч */
 .botMessage {
-  align-self: flex-start; /* Вирівнювання ліворуч */
+  align-self: flex-start;
   background-color: #f1f0f0;
   border-top-left-radius: 0;
   text-align: left;
 }
 
-/* Стиль для імені відправника */
 .senderName {
   margin: 0;
-  font-size: 12px; /* Маленький розмір шрифту для імені */
-  color: #555; /* Темно-сірий колір для контрасту */
-  margin-bottom: 5px; /* Відступ між ім'ям і текстом повідомлення */
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 5px;
   display: block;
 }
 
-/* Стиль для тексту повідомлення */
 .messageText {
-  font-size: 16px; /* Більший розмір шрифту для тексту повідомлення */
-  margin: 0; /* Прибираємо зовнішні відступи */
+  font-size: 16px;
+  margin: 0;
 }
 
 .messageInput {
@@ -104,5 +96,16 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@media (min-width: 768px) {
+  .messageItem {
+    max-width: 80%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .messageItem {
+    max-width: 60%;
   }
 }

@@ -1,9 +1,9 @@
-import React from 'react';
-import styles from './LoginBtn.module.css';
+import React from "react";
+import styles from "./LoginBtn.module.css";
 
 const LoginButton = () => {
   const handleGoogleLogin = () => {
-    window.location.href = 'http://localhost:3005/auth/google'; // Замініть URL на ваш серверний URL
+    window.location.href = "http://localhost:3005/auth/google";
   };
 
   return (

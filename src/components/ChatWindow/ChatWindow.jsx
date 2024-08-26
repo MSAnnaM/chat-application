@@ -15,7 +15,7 @@ const ChatWindow = ({ chat, messages, newMessage, setNewMessage, onSend }) => {
   if (!chat) return null;
 
   const handleSubmit = (e) => {
-    e.preventDefault(); // Запобігає перезавантаженню сторінки
+    e.preventDefault();
     onSend();
   };
 
