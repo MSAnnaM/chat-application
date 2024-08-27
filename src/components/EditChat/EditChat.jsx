@@ -17,7 +17,7 @@ const EditChatModal = ({ chat, onClose }) => {
 
   return (
     <div className={styles.modal} onClick={onClose}>
-      <div className={styles.modalContent}>
+      <div className={styles.modalContent} onClick={(e) => e.stopPropagation()}>
         <button className={styles.closeBtn} onClick={onClose}>
           <FaTimes />
         </button>

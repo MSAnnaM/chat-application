@@ -1,6 +1,7 @@
 import axios from "axios";
 const api = axios.create({
-  baseURL: "http://localhost:3005/api/",
+  // baseURL: "http://localhost:3005/api/",
+  baseURL: 'https://chat-app-api-production-8dc6.up.railway.app/api/',
 });
 export const fetchUser = async () => {
   const response = await api.get("user", {

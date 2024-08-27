@@ -3,7 +3,7 @@ import styles from "./LoginBtn.module.css";
 
 const LoginButton = () => {
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:3005/auth/google";
+    window.location.href = "https://chat-app-api-production-8dc6.up.railway.app/auth/google";
   };
 
   return (

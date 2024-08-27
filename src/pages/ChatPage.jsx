@@ -18,14 +18,14 @@ import "react-toastify/dist/ReactToastify.css";
 import "../App.css";
 import styles from "./ChatPage.module.css";
 import Placeholder from "../components/Placeholder/Placeholder";
-import LoginButton from "../components/LoginBtn/LoginBtn";
-import LogoutButton from "../components/LogoutBtn/LogoutBrn";
+// import LoginButton from "../components/LoginBtn/LoginBtn";
+// import LogoutButton from "../components/LogoutBtn/LogoutBrn";
 
-const socket = io("http://localhost:3005");
+const socket = io("chat-app-api-production-8dc6.up.railway.app");
 
 function ChatPage() {
   const dispatch = useDispatch();
-  const isUser = useSelector((state) => state.user.isUser);
+  // const isUser = useSelector((state) => state.user.isUser);
   const chats = useSelector((state) => state.chats.chats);
   const selectedChat = useSelector((state) => state.chats.selectedChat);
   const messages = useSelector((state) => state.chats.messages);
@@ -88,7 +88,7 @@ function ChatPage() {
       />
       <aside className={styles.sidebar}>
         <Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-        {!isUser ? <LoginButton /> : <LogoutButton />}
+        {/* {!isUser ? <LoginButton /> : <LogoutButton />} */}
         <ChatList
           chats={filteredChats}
           onSelect={handleSelectChat}
